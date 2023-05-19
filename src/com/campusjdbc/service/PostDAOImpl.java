@@ -86,6 +86,43 @@ public class PostDAOImpl implements PostDAO {
     }
 
     @Override
+    public List<PostDTO> selectPostsPages(int pageSize, int page){
+        List<PostDTO> posts = new ArrayList<>();
+        String sql = "SELECT * FROM posts ORDER BY id LIMIT ? OFFSET ?";
+        try (Connection conn = dbConnector.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ){
+                pstmt.setInt(1, pageSize);
+                pstmt.setInt(2, page-1);
+                ResultSet rs = pstmt.executeQuery();
+
+                while(rs.next()){
+                    PostDTO post = new PostDTO();
+                    post.setId(rs.getInt("id"));
+                    post.setTitle(rs.getString("title"));
+                    post.setContent(rs.getString("content"));
+                    posts.add(post);
+                }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return posts;
+    }
+
+    @Override
+    public int getSizeTable(){
+        String sql = "SELECT COUNT(id) FROM posts";
+        try (Connection conn = dbConnector.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();){
+            if(rs.next()) return rs.getInt(1);
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
     public boolean updatePost(PostDTO post) {
         String sql = "UPDATE posts SET title = ?, content = ? WHERE id = ? AND password = ?";
         try (Connection conn = dbConnector.getConnection();

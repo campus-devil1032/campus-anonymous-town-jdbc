@@ -4,9 +4,10 @@ public enum MenuOptionType {
     CREATE_POST(1),
     VIEW_POST(2),
     VIEW_ALL_POSTS(3),
-    UPDATE_POST(4),
-    DELETE_POST(5),
-    EXIT(6);
+    VIEW_POSTS_PAGES(4),
+    UPDATE_POST(5),
+    DELETE_POST(6),
+    EXIT(7);
 
     private final int value;
 

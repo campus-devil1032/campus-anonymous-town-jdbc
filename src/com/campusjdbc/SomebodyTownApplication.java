@@ -39,6 +39,9 @@ public class SomebodyTownApplication {
                 case VIEW_ALL_POSTS:
                     postController.getAllPosts();
                     break;
+                case VIEW_POSTS_PAGES:
+                    postController.getPostsPages();
+                    break;
                 case UPDATE_POST:
                     postController.updatePost();
                     break;

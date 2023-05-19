@@ -14,6 +14,7 @@ public class PostController {
     private final PostResponseView postResponseView = new PostResponseView();
     private final ApplicationInteractionView applicationInteractionView = new ApplicationInteractionView();
     private final Scanner scanner = new Scanner(System.in);
+    private final int pageSize = 10;
 
     public void createPost() {
         applicationInteractionView.displayEnterTitle();
@@ -46,6 +47,18 @@ public class PostController {
             postResponseView.displayNotFoundPost();
         }
     }
+    public void getPostsPages(){
+        int lastPage = postDAO.getSizeTable();
+        applicationInteractionView.displayEnterPage(lastPage);
+        int page = scanner.nextInt();
+
+        if(page> lastPage){
+            applicationInteractionView.displayWrongNumber();
+        } else{
+            List<PostDTO> posts = postDAO.selectPostsPages(pageSize, page);
+            postResponseView.displayAllPosts(posts);
+        }
+    } 
 
     public void getAllPosts() {
         List<PostDTO> posts = postDAO.selectAllPosts();

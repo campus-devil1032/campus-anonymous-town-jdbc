@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public class DBConnector {
     private static final String dbUrl = "jdbc:mysql://192.168.56.1:3306/somebody_town"; // your database url
-    private static final String username = "tom706"; // your database username
-    private static final String password = "wlfkfgksek12"; // your database password
+    private static final String username = "testuser"; // your database username
+    private static final String password = "1234"; // your database password
 
     public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(dbUrl, username, password);
