@@ -49,7 +49,7 @@ public class PostController {
     }
 
     public void getPostsPages() {
-        int lastPage = postDAO.getSizeTable() / 10 + 1;
+        int lastPage = postDAO.getSizeTable() / pageSize + 1;
         applicationInteractionView.displayEnterPage(lastPage);
         int page = scanner.nextInt();
 
@@ -60,7 +60,7 @@ public class PostController {
             postResponseView.displayAllPosts(posts);
         }
     }
-
+    
     public void getAllPosts() {
         List<PostDTO> posts = postDAO.selectAllPosts();
         postResponseView.displayAllPosts(posts);
