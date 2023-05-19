@@ -5,9 +5,10 @@ public class ApplicationInteractionView {
         System.out.println("\n1. Create post");
         System.out.println("2. View post");
         System.out.println("3. View all posts");
-        System.out.println("4. Update post");
-        System.out.println("5. Delete post");
-        System.out.println("6. Exit");
+        System.out.println("4. View selected page");
+        System.out.println("5. Update post");
+        System.out.println("6. Delete post");
+        System.out.println("7. Exit");
         System.out.println("Enter an option:");
     }
     public void displayWrongOption(){
@@ -28,5 +29,13 @@ public class ApplicationInteractionView {
     public void displayEnterId(){
         System.out.println("Enter Post ID:");
     }
-        
+
+    public void displayEnterPage(int pageSize){
+        System.out.println("마지막 페이지는 "+pageSize/10+1+"입니다.");
+        System.out.println("몇페이지를 보시겠습니까?");
+    }
+
+    public void displayWrongNumber(){
+        System.out.println("마지막 페이지의 범위를 넘어갔습니다.");
+    }
 }

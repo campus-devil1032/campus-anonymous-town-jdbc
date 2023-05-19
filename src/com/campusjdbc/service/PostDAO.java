@@ -11,6 +11,10 @@ public interface PostDAO {
 
     List<PostDTO> selectAllPosts(); // 모든 게시글 가져오기
 
+    List<PostDTO> selectPostsPages(int pageSize, int page);
+
+    int getSizeTable();
+
     boolean updatePost(PostDTO post); // 게시글 수정
 
     boolean deletePost(int id, String password); // 게시글 삭제
