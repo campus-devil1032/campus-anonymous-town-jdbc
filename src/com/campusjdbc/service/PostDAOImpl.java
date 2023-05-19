@@ -18,8 +18,7 @@ public class PostDAOImpl implements PostDAO {
         try (
                 Connection conn = dbConnector.getConnection();
                 // PreparedStatement 는 SQL Injection 을 방어하는 가장 기본적인 기법이다. 공부하세요!
-                PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)
-        ) {
+                PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             pstmt.setString(1, post.getTitle());
             pstmt.setString(2, post.getContent());
             pstmt.setString(3, post.getPassword());
@@ -45,7 +44,7 @@ public class PostDAOImpl implements PostDAO {
     public PostDTO selectPost(int id) {
         String sql = "SELECT * FROM posts WHERE id = ?";
         try (Connection conn = dbConnector.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -55,7 +54,7 @@ public class PostDAOImpl implements PostDAO {
                 post.setId(rs.getInt("id"));
                 post.setTitle(rs.getString("title"));
                 post.setContent(rs.getString("content"));
-                post.setPassword(rs.getString("password"));  // 실제로 비밀번호는 안전한 방법으로 처리해야 합니다. 이 코드는 단순한 예시일 뿐입니다.
+                post.setPassword(rs.getString("password")); // 실제로 비밀번호는 안전한 방법으로 처리해야 합니다. 이 코드는 단순한 예시일 뿐입니다.
                 return post;
             }
         } catch (SQLException e) {
@@ -69,8 +68,8 @@ public class PostDAOImpl implements PostDAO {
         List<PostDTO> posts = new ArrayList<>();
         String sql = "SELECT * FROM posts";
         try (Connection conn = dbConnector.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            ResultSet rs = pstmt.executeQuery()) {
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
                 PostDTO post = new PostDTO();
@@ -86,23 +85,22 @@ public class PostDAOImpl implements PostDAO {
     }
 
     @Override
-    public List<PostDTO> selectPostsPages(int pageSize, int page){
+    public List<PostDTO> selectPostsPages(int pageSize, int page) {
         List<PostDTO> posts = new ArrayList<>();
         String sql = "SELECT * FROM posts ORDER BY id LIMIT ? OFFSET ?";
         try (Connection conn = dbConnector.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            ){
-                pstmt.setInt(1, pageSize);
-                pstmt.setInt(2, page-1);
-                ResultSet rs = pstmt.executeQuery();
+                PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setInt(1, pageSize);
+            pstmt.setInt(2, (page - 1) * pageSize);
+            ResultSet rs = pstmt.executeQuery();
 
-                while(rs.next()){
-                    PostDTO post = new PostDTO();
-                    post.setId(rs.getInt("id"));
-                    post.setTitle(rs.getString("title"));
-                    post.setContent(rs.getString("content"));
-                    posts.add(post);
-                }
+            while (rs.next()) {
+                PostDTO post = new PostDTO();
+                post.setId(rs.getInt("id"));
+                post.setTitle(rs.getString("title"));
+                post.setContent(rs.getString("content"));
+                posts.add(post);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -110,13 +108,14 @@ public class PostDAOImpl implements PostDAO {
     }
 
     @Override
-    public int getSizeTable(){
+    public int getSizeTable() {
         String sql = "SELECT COUNT(id) FROM posts";
         try (Connection conn = dbConnector.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            ResultSet rs = pstmt.executeQuery();){
-            if(rs.next()) return rs.getInt(1);
-        }catch (SQLException e) {
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                ResultSet rs = pstmt.executeQuery();) {
+            if (rs.next())
+                return rs.getInt(1);
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return 0;
@@ -126,7 +125,7 @@ public class PostDAOImpl implements PostDAO {
     public boolean updatePost(PostDTO post) {
         String sql = "UPDATE posts SET title = ?, content = ? WHERE id = ? AND password = ?";
         try (Connection conn = dbConnector.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, post.getTitle());
             pstmt.setString(2, post.getContent());
@@ -144,7 +143,7 @@ public class PostDAOImpl implements PostDAO {
     public boolean deletePost(int id, String password) {
         String sql = "DELETE FROM posts WHERE id = ? AND password = ?";
         try (Connection conn = dbConnector.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, id);
             pstmt.setString(2, password);

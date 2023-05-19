@@ -12,9 +12,9 @@ public class SomebodyTownApplication {
     private static final PostController postController = new PostController();
     private static final ApplicationInteractionView applicationInteractionView = new ApplicationInteractionView();
 
-
     /**
-     * @throws InvalidPostUpdateException - 개발단계에서 잡아야 하는 에러다. catch 하면 안되고 이 에러가 발생하면 조건을 반드시 확인하자
+     * @throws InvalidPostUpdateException - 개발단계에서 잡아야 하는 에러다. catch 하면 안되고 이 에러가
+     *                                    발생하면 조건을 반드시 확인하자
      */
     public static void main(String[] args) throws InvalidPostUpdateException {
         boolean run = true;

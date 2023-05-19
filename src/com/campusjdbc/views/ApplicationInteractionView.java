@@ -11,31 +11,33 @@ public class ApplicationInteractionView {
         System.out.println("7. Exit");
         System.out.println("Enter an option:");
     }
-    public void displayWrongOption(){
+
+    public void displayWrongOption() {
         System.out.println("잘못된 옵션입니다. 다시 시도해 주세요.");
     }
-    public void displayEnterTitle(){
+
+    public void displayEnterTitle() {
         System.out.println("Enter title:");
     }
 
-    public void displayEnterContent(){
+    public void displayEnterContent() {
         System.out.println("Enter content:");
     }
 
-    public void displayEnterPassword(){
+    public void displayEnterPassword() {
         System.out.println("Enter password:");
     }
 
-    public void displayEnterId(){
+    public void displayEnterId() {
         System.out.println("Enter Post ID:");
     }
 
-    public void displayEnterPage(int pageSize){
-        System.out.println("마지막 페이지는 "+pageSize/10+1+"입니다.");
+    public void displayEnterPage(int pageSize) {
+        System.out.println("마지막 페이지는 " + pageSize + "입니다.");
         System.out.println("몇페이지를 보시겠습니까?");
     }
 
-    public void displayWrongNumber(){
+    public void displayWrongNumber() {
         System.out.println("마지막 페이지의 범위를 넘어갔습니다.");
     }
 }

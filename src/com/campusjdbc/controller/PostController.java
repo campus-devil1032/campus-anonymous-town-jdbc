@@ -47,18 +47,19 @@ public class PostController {
             postResponseView.displayNotFoundPost();
         }
     }
-    public void getPostsPages(){
-        int lastPage = postDAO.getSizeTable();
+
+    public void getPostsPages() {
+        int lastPage = postDAO.getSizeTable() / 10 + 1;
         applicationInteractionView.displayEnterPage(lastPage);
         int page = scanner.nextInt();
 
-        if(page> lastPage){
+        if (page > lastPage) {
             applicationInteractionView.displayWrongNumber();
-        } else{
+        } else {
             List<PostDTO> posts = postDAO.selectPostsPages(pageSize, page);
             postResponseView.displayAllPosts(posts);
         }
-    } 
+    }
 
     public void getAllPosts() {
         List<PostDTO> posts = postDAO.selectAllPosts();
@@ -70,7 +71,7 @@ public class PostController {
         int id = scanner.nextInt();
 
         applicationInteractionView.displayEnterTitle();
-        scanner.nextLine();  // consume leftover newline
+        scanner.nextLine(); // consume leftover newline
         String title = scanner.nextLine();
 
         applicationInteractionView.displayEnterContent();
@@ -98,7 +99,7 @@ public class PostController {
         int id = scanner.nextInt();
 
         applicationInteractionView.displayEnterPassword();
-        scanner.nextLine();  // consume leftover newline
+        scanner.nextLine(); // consume leftover newline
         String password = scanner.nextLine();
 
         if (postDAO.deletePost(id, password)) {

@@ -3,9 +3,7 @@ package com.campusjdbc.views;
 import com.campusjdbc.dto.PostDTO;
 import java.util.List;
 
-
 public class PostResponseView {
-
 
     public void displayPost(PostDTO post) {
         System.out.println("\nID: " + post.getId());
