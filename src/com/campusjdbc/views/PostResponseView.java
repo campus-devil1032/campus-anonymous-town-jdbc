@@ -1,17 +1,18 @@
 package com.campusjdbc.views;
 
 import com.campusjdbc.dto.PostDTO;
-
 import java.util.List;
 
 public class PostResponseView {
-
 
     public void displayPost(PostDTO post) {
         System.out.println("\nID: " + post.getId());
         System.out.println("제목: " + post.getTitle());
         System.out.println("내용: " + post.getContent());
         System.out.println("게시물 비밀번호: " + post.getPassword());
+    }
+
+    public void displayAllPostsPages(List<PostDTO> posts) {
     }
 
     public void displayAllPosts(List<PostDTO> posts) {
