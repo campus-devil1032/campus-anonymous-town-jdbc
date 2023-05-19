@@ -3,6 +3,7 @@ package com.campusjdbc.controller;
 import com.campusjdbc.exceptions.InvalidPostUpdateException;
 import com.campusjdbc.service.PostDAOImpl;
 import com.campusjdbc.dto.PostDTO;
+import com.campusjdbc.views.ApplicationInteractionView;
 import com.campusjdbc.views.PostResponseView;
 
 import java.util.List;
@@ -11,17 +12,17 @@ import java.util.Scanner;
 public class PostController {
     private final PostDAOImpl postDAO = new PostDAOImpl();
     private final PostResponseView postResponseView = new PostResponseView();
-
+    private final ApplicationInteractionView applicationInteractionView = new ApplicationInteractionView();
     private final Scanner scanner = new Scanner(System.in);
 
     public void createPost() {
-        System.out.println("Enter title:");
+        applicationInteractionView.displayEnterTitle();
         String title = scanner.nextLine();
 
-        System.out.println("Enter content:");
+        applicationInteractionView.displayEnterContent();
         String content = scanner.nextLine();
 
-        System.out.println("Enter password:");
+        applicationInteractionView.displayEnterPassword();
         String password = scanner.nextLine();
 
         PostDTO newPost = new PostDTO();
@@ -35,7 +36,7 @@ public class PostController {
     }
 
     public void getPost() {
-        System.out.println("Enter Post ID:");
+        applicationInteractionView.displayEnterId();
         int id = scanner.nextInt();
         PostDTO post = postDAO.selectPost(id);
 
@@ -52,17 +53,17 @@ public class PostController {
     }
 
     public void updatePost() throws InvalidPostUpdateException {
-        System.out.println("Enter Post ID:");
+        applicationInteractionView.displayEnterId();
         int id = scanner.nextInt();
 
-        System.out.println("Enter new title:");
+        applicationInteractionView.displayEnterTitle();
         scanner.nextLine();  // consume leftover newline
         String title = scanner.nextLine();
 
-        System.out.println("Enter new content:");
+        applicationInteractionView.displayEnterContent();
         String content = scanner.nextLine();
 
-        System.out.println("Enter password:");
+        applicationInteractionView.displayEnterPassword();
         String password = scanner.nextLine();
 
         PostDTO post = new PostDTO();
@@ -80,10 +81,10 @@ public class PostController {
     }
 
     public void deletePost() {
-        System.out.println("Enter Post ID:");
+        applicationInteractionView.displayEnterId();
         int id = scanner.nextInt();
 
-        System.out.println("Enter password:");
+        applicationInteractionView.displayEnterPassword();
         scanner.nextLine();  // consume leftover newline
         String password = scanner.nextLine();
 
