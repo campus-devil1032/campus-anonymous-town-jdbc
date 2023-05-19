@@ -45,7 +45,7 @@ public class PostDAOImpl implements PostDAO {
     public PostDTO selectPost(int id) {
         String sql = "SELECT * FROM posts WHERE id = ?";
         try (Connection conn = dbConnector.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -69,8 +69,8 @@ public class PostDAOImpl implements PostDAO {
         List<PostDTO> posts = new ArrayList<>();
         String sql = "SELECT * FROM posts";
         try (Connection conn = dbConnector.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
                 PostDTO post = new PostDTO();
@@ -89,7 +89,7 @@ public class PostDAOImpl implements PostDAO {
     public boolean updatePost(PostDTO post) {
         String sql = "UPDATE posts SET title = ?, content = ? WHERE id = ? AND password = ?";
         try (Connection conn = dbConnector.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, post.getTitle());
             pstmt.setString(2, post.getContent());
@@ -107,7 +107,7 @@ public class PostDAOImpl implements PostDAO {
     public boolean deletePost(int id, String password) {
         String sql = "DELETE FROM posts WHERE id = ? AND password = ?";
         try (Connection conn = dbConnector.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, id);
             pstmt.setString(2, password);
